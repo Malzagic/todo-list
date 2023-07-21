@@ -13,9 +13,6 @@ app.use(parser);
 app.get("/", (req, res) => {
     const arr = [];
 
-    const item = localStorage.getItem('key');
-    console.log(item); // Output: 'value'
-
     const data = {
         title: 'ToDo List - App',
         list: arr,

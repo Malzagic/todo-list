@@ -10,7 +10,8 @@ app.use(parser);
 
 app.get("/", (req, res) => {
     const data = {
-        title: 'ToDo List - App'
+        title: 'ToDo List - App',
+        list: [localStorage.getItem("item")],
     }
 
     res.render("index.ejs", {data: data});

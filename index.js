@@ -1,7 +1,5 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { LocalStorage } from "node-localstorage";
-global.localStorage = new LocalStorage('./scratch');
 
 const app = express();
 const port = 8000;

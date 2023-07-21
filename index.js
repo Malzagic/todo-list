@@ -1,5 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { LocalStorage } from "node-localstorage";
+global.localStorage = new LocalStorage('./scratch');
 
 const app = express();
 const port = 8000;
@@ -9,9 +11,11 @@ app.use(express.static("public"));
 app.use(parser);
 
 app.get("/", (req, res) => {
+    const arr = [];
+
     const data = {
         title: 'ToDo List - App',
-        list: [localStorage.getItem("item")],
+        list: arr,
     }
 
     res.render("index.ejs", {data: data});

@@ -12,12 +12,16 @@
 
 
     <!-- List of ToDo things -->
-    <% for(let i=0; i < data.list.length; i++) { %>
-        <ul><%data.list.forEach(item => { %>
-            <li><%= item.name %> <%= item.todo  %></li>
-        <% }) %></ul>
-        <% } %>
-            <p class="lead">
-                <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-            </p>
+    <ul class="list-group list-group-flush mb-5">
+        <%data.list.forEach((item, index)=> { %>
+            <li class="list-group-item bg-dark text-light"><span class="fs-4">
+                    <%= index+1 %>.
+                </span>
+                <%= item.name %> : <%= item.todo %>
+            </li>
+            <% }) %>
+    </ul>
+    <p class="lead">
+        <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+    </p>
 </main>

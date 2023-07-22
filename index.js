@@ -16,51 +16,61 @@ const password = process.env.MONGODB_PASSWORD;
 const url = `mongodb+srv://${login}:${password}@todolist.reaw3ux.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(url);
 const dbName = "list";
-
-
-// async function run(req, res, next) {
-//     try {
-//         await client.connect();
-//         console.log("Successfully connected to Atlas");
-//     } catch (err) {
-//         console.log(err.stack);
-//     }
-//     finally {
-//         await client.close();
-//     }
-
-//     next();
-// }
+const data = {
+    title: 'ToDo List - App',
+    list: [],
+}
 
 
 
-app.use(express.static("public"));
-app.use(parser);
-
-// app.use(run);
-
-app.get("/", async (req, res) => {
-    const data = {
-        title: 'ToDo List - App',
-        list: [],
-    }
-
+async function run(req, res, next) {
     try {
         await client.connect();
         const db = client.db(dbName);
         const col = db.collection("todo");
 
-        const myDoc = await col.findOne();
-        data.list.push(myDoc);
+        const cursor = col.find({});
+        const allRecords = await cursor.toArray();
+        
+        data.list = allRecords;
     } catch (err) {
         console.log(err.stack);
     }
 
+    next();
+}
+
+
+
+app.use(express.static("public"));
+app.use(parser);
+app.use(run);
+
+app.get("/", (req, res) => {
+
     res.render("index.ejs", { data: data });
 });
 
-app.post("/submit", (req, res) => {
+app.post("/submit", async (req, res, next) => {
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const col = db.collection("todo");
 
+        const newData = {
+            name: req.body.name,
+            todo: req.body.todo,
+        }
+
+        const myDoc = await col.insertOne(newData);
+        
+        data.list.push(newData);
+
+        res.render("index.ejs", { data: data })
+        next();
+    } catch (err) {
+        console.log(err.stack);
+    }
 });
 
 app.listen(port, () => {

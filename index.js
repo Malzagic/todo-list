@@ -59,6 +59,10 @@ app.get("/", async (req, res) => {
     res.render("index.ejs", { data: data });
 });
 
+app.post("/submit", (req, res) => {
+
+});
+
 app.listen(port, () => {
     console.log(`Server is running at: ${port} port.`)
 });

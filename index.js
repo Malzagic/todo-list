@@ -1,9 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-
 import { MongoClient } from "mongodb";
 import 'dotenv/config';
-
 
 const app = express();
 const port = 8000;

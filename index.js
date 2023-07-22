@@ -15,6 +15,7 @@ const url = `mongodb+srv://${login}:${password}@todolist.reaw3ux.mongodb.net/?re
 const client = new MongoClient(url);
 const dbName = "list";
 const data = {
+    _id: '',
     title: 'ToDo List - App',
     list: [],
 }
@@ -67,6 +68,19 @@ app.post("/submit", async (req, res, next) => {
         res.render("index.ejs", { data: data })
         next();
     } catch (err) {
+        console.log(err.stack);
+    }
+});
+
+app.delete("/delete", async (req, res, next) => {
+    try {
+        await client.connect();
+        const db = client.db(dbName);
+        const col = db.collection("todo");
+
+        console.log(req.body.id)
+        // const filter = { _id: new ObjectID(itemId) };
+    } catch(err) {
         console.log(err.stack);
     }
 });

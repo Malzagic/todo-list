@@ -1,4 +1,4 @@
-<main class="px-3">
+<main class="container-fluid px-3 my-5">
     <h1>
         <%= data.title %>
     </h1>
@@ -12,16 +12,28 @@
 
 
     <!-- List of ToDo things -->
-    <ul class="list-group list-group-flush mb-5">
-        <%data.list.forEach((item, index)=> { %>
-            <li class="list-group-item bg-dark text-light"><span class="fs-4">
-                    <%= index+1 %>.
-                </span>
-                <%= item.name %> : <%= item.todo %>
-            </li>
-            <% }) %>
-    </ul>
-    <p class="lead">
-        <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-    </p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <%data.list.forEach((item, index)=> { %>
+                <% const arr=["border-success-subtle", "border-secondary-subtle" , "border-danger-subtle"
+                    , "border-warning-subtle" , "border-info-subtle" , "border-light-subtle" ]; %>
+                    <% const random=Math.floor(Math.random() * arr.length) %>
+                        <div
+                            class="card bg-dark text-light <%= arr[random]  %> justify-content-center align-items-center col-3 m-2" id=<%=item._id %>>
+                            <form class="card-body d-flex flex-column justify-content-between w-100" action="/delete"
+                                method="DELETE">
+                                <h5 class="card-title"><span class="fs-3">
+                                        <%= index+1 %>.
+                                    </span>
+                                    <%= item.name %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= item.todo %>
+                                </p>
+                                <button type="submit" class="btn btn-outline-light">delete</button>
+                            </form>
+                        </div>
+                        <% }) %>
+        </div>
+    </div>
 </main>

@@ -1,14 +1,14 @@
 import express from "express";
 import bodyParser from "body-parser";
 
+import { MongoClient } from "mongodb";
+import 'dotenv/config';
+
 
 const app = express();
 const port = 8000;
 const parser = bodyParser.urlencoded({ extended: true });
 
-
-import { MongoClient } from "mongodb";
-import 'dotenv/config';
 
 const login = process.env.MONGODB_LOGIN;
 const password = process.env.MONGODB_PASSWORD;

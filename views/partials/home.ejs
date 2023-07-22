@@ -1,9 +1,20 @@
 <main class="px-3">
-    <h1><%= data.title %></h1>
-    <% for(let i = 0; i < data.list.length; i++) { %>
+    <h1>
+        <%= data.title %>
+    </h1>
+    <form action="/submit" method="POST">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="name" aria-label="name" name="name">
+            <input type="text" class="form-control" placeholder="todo" aria-label="todo" name="todo">
+        </div>
+    </form>
+
+
+    <!-- List of ToDo things -->
+    <% for(let i=0; i < data.list.length; i++) { %>
         <ul>test</ul>
-    <% } %>
-    <p class="lead">
-        <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-    </p>
+        <% } %>
+            <p class="lead">
+                <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+            </p>
 </main>

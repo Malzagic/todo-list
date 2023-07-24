@@ -1,4 +1,4 @@
-#ToDo List - App
+# ToDo List - App
 
 This is a simple project from course but is extended with new functionalities by added mongodb to store data and it will be modified for the future to store different data for different users.
 

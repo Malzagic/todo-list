@@ -98,6 +98,10 @@ app.delete("/delete", async (req, res, next) => {
 
 });
 
+app.get("/about", (req, res) => {
+    res.render("about.ejs");
+});
+
 app.listen(port, () => {
     console.log(`Server is running at: ${port} port.`)
 });

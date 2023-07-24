@@ -1,8 +1,8 @@
 <main class="container-fluid px-3 my-5">
     <h1>
-        <%= data.title %>
+        <%= title %>
     </h1>
-    <form action="/submit" method="POST">
+    <form>
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="name" aria-label="name" name="name">
             <input type="text" class="form-control" placeholder="todo" aria-label="todo" name="todo">
@@ -13,15 +13,14 @@
 
     <!-- List of ToDo things -->
     <div class="container">
-        <div class="row justify-content-center">
-            <%data.list.forEach((item, index)=> { %>
+        <div id="cards" class="row justify-content-center">
+            <%data.forEach((item, index)=> { %>
                 <% const arr=["border-success-subtle", "border-secondary-subtle" , "border-danger-subtle"
                     , "border-warning-subtle" , "border-info-subtle" , "border-light-subtle" ]; %>
                     <% const random=Math.floor(Math.random() * arr.length) %>
                         <div
-                            class="card bg-dark text-light <%= arr[random]  %> justify-content-center align-items-center col-3 m-2" id=<%=item._id %>>
-                            <form class="card-body d-flex flex-column justify-content-between w-100" action="/delete"
-                                method="DELETE">
+                            class="card bg-dark text-light <%= arr[random]  %> justify-content-center align-items-center col-3 m-2">
+                            <div id=<%= item._id %> data-id=<%= item.id %> class="card-body d-flex flex-column justify-content-between w-100">
                                 <h5 class="card-title"><span class="fs-3">
                                         <%= index+1 %>.
                                     </span>
@@ -30,8 +29,8 @@
                                 <p class="card-text">
                                     <%= item.todo %>
                                 </p>
-                                <button type="submit" class="btn btn-outline-light">delete</button>
-                            </form>
+                                <button type="submit" class="delete btn btn-outline-light">Delete</button>
+                            </div>
                         </div>
                         <% }) %>
         </div>
